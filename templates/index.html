@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Thêm bệnh nhân mới</h2>
+<form method="post" action="/add_patient" class="card p-4 mb-5">
+  <div class="mb-3">
+    <label class="form-label">Tên bệnh nhân</label>
+    <input type="text" class="form-control" name="name" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Mức độ ưu tiên</label>
+    <select class="form-select" name="priority" required>
+      <option value="VIP+Emergency">VIP + Cấp cứu</option>
+      <option value="Emergency">Cấp cứu</option>
+      <option value="VIP">VIP</option>
+      <option value="Normal">Thông thường</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Thời gian đến (giờ phút)</label>
+    <input type="datetime-local" class="form-control" name="arrival_time" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Trạng thái</label>
+    <select class="form-select" name="status" required>
+      <option value="Waiting">Chờ khám</option>
+      <option value="Consulting">Đang khám</option>
+      <option value="Completed">Đã khám</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Thêm vào hàng chờ</button>
+</form>
+
+<h2 class="mb-3">Hàng chờ hiện tại</h2>
+<ul class="list-group" id="queue-list">
+  {% for patient in queue %}
+  <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 2vh; border-radius: 1rem;">
+    <div>
+      <a href="{{ url_for('patient_info', patient_id=patient.id) }}">
+        <strong>{{ patient.name }}</strong>
+      </a> — {{ patient.priority }}<br>
+      <small>Đến lúc: {{ patient.arrival_time }}</small><br>
+      <span class="badge bg-info">{{ patient.status }}</span>
+    </div>
+    <form method="post" action="/update_status/{{ patient.id }}" class="d-inline-block">
+      <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="Waiting" {% if patient.status == 'Waiting' %}selected{% endif %}>Chờ khám</option>
+        <option value="Consulting" {% if patient.status == 'Consulting' %}selected{% endif %}>Đang khám</option>
+        <option value="Completed" {% if patient.status == 'Completed' %}selected{% endif %}>Đã khám</option>
+      </select>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+
+<script>
+  function refreshQueue() {
+    fetch('/queue_display')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('queue-list').innerHTML = html;
+        document.getElementById('queue-list').getElementById('base-nav-bar').style.display = 'none';
+      });
+  }
+
+  setInterval(refreshQueue, 5000); // Cập nhật hàng chờ sau mỗi 5 giây
+</script>
+{% endblock %}

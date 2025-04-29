@@ -1,0 +1,29 @@
+html, body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100%;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.card, .list-group-item, .alert {
+  border-radius: 1rem;
+}
+
+.list-group-item {
+  margin-bottom: 2vh;
+  border-radius: 1rem;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  background-color: var(--bs-primary-bg-subtle);
+  border-radius: 0.5rem;
+}
+
+.navbar-nav {
+  padding-right: 15px;
+}
+
+.nav-item {
+  padding: 0 15px;
+}
