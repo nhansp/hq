@@ -58,7 +58,6 @@
       .then(response => response.text())
       .then(html => {
         document.getElementById('queue-list').innerHTML = html;
-        document.getElementById('queue-list').getElementById('base-nav-bar').style.display = 'none';
       });
   }
 

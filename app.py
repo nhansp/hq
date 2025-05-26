@@ -19,7 +19,7 @@ def save_queue(queue):
         json.dump(queue, f, ensure_ascii=False, indent=4)
 
 def sort_queue(queue):
-    priority_order = {'VIP+Emergency': 0, 'Emergency': 1, 'VIP': 2, 'Normal': 3}
+    priority_order = {'Emergency': 0,'Normal': 1}
     return sorted(queue, key=lambda p: (priority_order[p['priority']], p['arrival_time']))
 
 @app.route('/')
@@ -86,4 +86,4 @@ def call_next():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 text-center">Thông tin bệnh nhân</h2>
+<div class="card p-4">
+  <h3>{{ patient.name }}</h3>
+  <p><strong>Mức độ ưu tiên:</strong> {{ patient.priority }}</p>
+  <p><strong>Thời gian đến:</strong> {{ patient.arrival_time }}</p>
+</div>
+
+<form method="post" action="/delete_patient/{{ patient.id }}" class="mt-4 text-center">
+  <button type="submit" class="btn btn-danger btn-lg">Xóa bệnh nhân</button>
+</form>
+
+{% endblock %}
