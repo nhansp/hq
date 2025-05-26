@@ -9,15 +9,8 @@
     {
         "id": 2,
         "name": "ádad",
-        "priority": "VIP+Emergency",
+        "priority": "Emergency",
         "arrival_time": "2025-05-20T13:37",
         "status": "Completed"
-    },
-    {
-        "id": 3,
-        "name": "hvgjyjhkgj",
-        "priority": "VIP+Emergency",
-        "arrival_time": "43345-02-08T03:45",
-        "status": "Waiting"
     }
 ]
