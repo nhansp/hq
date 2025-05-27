@@ -15,7 +15,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Thời gian đến (giờ phút)</label>
-    <input type="datetime-local" class="form-control" name="arrival_time" required>
+    <input type="datetime-local" class="form-control" name="arrival_time" id="form-datetime" required autocomplete="on">
   </div>
   <div class="mb-3">
     <label class="form-label">Trạng thái</label>
@@ -51,6 +51,15 @@
 </ul>
 
 <script>
+  const dateTimeInput = document.getElementById('form-datetime');
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); 
+  const day = now.getDate().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+  dateTimeInput.value = formattedDateTime;
   function refreshQueue() {
     fetch('/queue_stub')
       .then(response => response.text())
@@ -58,7 +67,6 @@
         document.getElementById('queue-list').innerHTML = html;
       });
   }
-
-  setInterval(refreshQueue, 5000); // Cập nhật hàng chờ sau mỗi 5 giây
+  setInterval(refreshQueue, 5000);
 </script>
 {% endblock %}
