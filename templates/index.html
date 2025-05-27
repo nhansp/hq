@@ -52,7 +52,7 @@
 
 <script>
   function refreshQueue() {
-    fetch('/queue_display')
+    fetch('/queue_stub')
       .then(response => response.text())
       .then(html => {
         document.getElementById('queue-list').innerHTML = html;

@@ -1,0 +1,28 @@
+{% block content %}
+<ul class="list-group">
+  {% for patient in queue %}
+  <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 2vh; border-radius: 1rem;">
+    <div>
+      <a href="{{ url_for('patient_info', patient_id=patient.id) }}">
+        <strong>{{ patient.name }}</strong>
+      </a> — {{ patient.priority }}<br>
+      <small>Đến lúc: {{ patient.arrival_time }}</small><br>
+      <span class="badge bg-info">{{ patient.status }}</span>
+    </div>
+    <form method="post" action="/update_status/{{ patient.id }}" class="d-inline-block">
+      <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="Waiting" {% if patient.status == 'Waiting' %}selected{% endif %}>Chờ khám</option>
+        <option value="Consulting" {% if patient.status == 'Consulting' %}selected{% endif %}>Đang khám</option>
+        <option value="Completed" {% if patient.status == 'Completed' %}selected{% endif %}>Đã khám</option>
+      </select>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+
+<script>
+  setTimeout(function() {
+    window.location.reload();
+  }, 5000);
+</script>
+{% endblock %}

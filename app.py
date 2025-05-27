@@ -52,6 +52,12 @@ def queue_display():
     queue = sort_queue(queue)
     return render_template('queue_list.html', queue=queue)
 
+@app.route('/queue_stub')
+def queue_stub():
+    queue = load_queue()
+    queue = sort_queue(queue)
+    return render_template('queue_stub.html', queue=queue)
+
 @app.route('/patient_info/<int:patient_id>')
 def patient_info(patient_id):
     queue = load_queue()
