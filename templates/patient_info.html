@@ -6,6 +6,10 @@
   <h4>ID: {{ patient.id }}</h4>
   <p><strong>Mức độ ưu tiên:</strong> {{ patient.priority }}</p>
   <p><strong>Thời gian đến:</strong> {{ patient.arrival_time }}</p>
+  <p><strong>Bệnh nhân có thể lưu mã QR này để tiện tra cứu: <p style="display: none;" id="currenturl">{{ current_url }}</p></strong></p>
+  <div id="qr-code-container">
+    <img src="{{ qr_img_base64 }}" alt="qr">
+  </div>
 </div>
 
 <form method="post" action="/delete_patient/{{ patient.id }}" class="mt-4 text-center">

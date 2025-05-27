@@ -26,3 +26,10 @@ html, body {
 .nav-item {
   padding: 0 15px;
 }
+
+#qr-code-container img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
