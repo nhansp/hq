@@ -19,8 +19,20 @@ def save_queue(queue):
         json.dump(queue, f, ensure_ascii=False, indent=4)
 
 def sort_queue(queue):
-    priority_order = {'Emergency': 0,'Normal': 1}
-    return sorted(queue, key=lambda p: (priority_order[p['priority']], p['arrival_time']))
+    priority_order = {
+        'Emergency': 0, 
+        'Normal': 1
+    }
+    patient_curr_status = {
+        'Consulting': 0,
+        'Waiting': 1,
+        'Completed': 2
+    }
+    return sorted(queue, key=lambda p: (
+        patient_curr_status[p['status']],
+        priority_order[p['priority']], 
+        p['arrival_time']
+    ))
 
 @app.route('/')
 def index():

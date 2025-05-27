@@ -15,7 +15,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Thời gian đến (giờ phút)</label>
-    <input type="datetime-local" class="form-control" name="arrival_time" id="form-datetime" required autocomplete="on">
+    <input type="datetime-local" class="form-control" name="arrival_time" id="form-datetime" required>
   </div>
   <div class="mb-3">
     <label class="form-label">Trạng thái</label>
@@ -34,8 +34,8 @@
   <li class="list-group-item d-flex justify-content-between align-items-center" style="margin-bottom: 2vh; border-radius: 1rem;">
     <div>
       <a href="{{ url_for('patient_info', patient_id=patient.id) }}">
-        <strong>{{ patient.name }}</strong>
-      </a> — {{ patient.priority }}<br>
+        <strong> {{ patient.name }}</strong>
+      </a> — {{ patient.priority }}<br>ID: <a href="{{ url_for('patient_info', patient_id=patient.id) }}">{{ patient.id }}</a><br>
       <small>Đến lúc: {{ patient.arrival_time }}</small><br>
       <span class="badge bg-info">{{ patient.status }}</span>
     </div>
